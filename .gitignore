@@ -1,0 +1,40 @@
+# --- World & server-generated data (never share) ---
+world/
+world_nether/
+world_the_end/
+
+# --- Player / player-identifying data ---
+whitelist.json
+usercache.json
+banned-players.json
+banned-ips.json
+ops.json
+version_history.json
+.console_history
+
+# --- Server internals, not relevant to the submission ---
+cache/
+libraries/
+versions/
+logs/
+plugins/
+config/
+
+# --- Large binaries (link to download instead of committing) ---
+paper-*.jar
+opentelemetry-javaagent.jar
+*.jar
+
+# --- Misc server config that may leak details (review individually if needed) ---
+server.properties
+bukkit.yml
+commands.yml
+help.yml
+permissions.yml
+spigot.yml
+eula.txt
+start.sh
+
+# --- OS/editor noise ---
+.DS_Store
+*.swp
