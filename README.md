@@ -41,6 +41,15 @@ Paper Minecraft Server (JVM)
 | SigNoz | Unified backend for metrics + logs, dashboarding, and alerting |
 | SigNoz Foundry | Declarative, reproducible SigNoz deployment (`casting.yaml`) |
 
+
+## Prerequisites
+ 
+- A running Paper Minecraft server (this project instruments an existing server — it doesn't set one up)
+- Docker installed and running
+- `curl`
+- Linux/macOS (steps use bash; adjust for Windows/WSL)
+
+
 ## Reproducing this setup
 
 ### 1. Deploy SigNoz via Foundry
@@ -96,6 +105,20 @@ Alerts → New Alert Rule → Metric-based:
 - Metric: `mc_tps`
 - Condition: `< 15` for 1+ minute
 - Notification channel of your choice
+
+### 6. Verify it's all working
+ 
+- **Metrics**: In SigNoz's Metrics explorer, search `mc_tps` — you should see live data points updating every ~10s.
+- **Logs**: In the Logs tab, you should see your server's live console output streaming in.
+- **Dashboard**: All three panels should show real, moving data, not empty charts.
+- **Alert**: Trigger it for real — cause a TPS drop (e.g. spawn a large number of entities, or run something load-heavy) and confirm the alert fires in SigNoz's Alerts tab within the evaluation window you set.
+If any of these don't show data, check the collector's own logs first:
+```bash
+docker logs mc-otel-collector
+```
+Common issues (both hit during development of this project): the exporter plugin binding to `127.0.0.1` instead of `0.0.0.0`, and a host firewall (e.g. `ufw`) blocking Docker's bridge network from reaching the exporter's port. See "What I ran into" below.
+
+
 
 ## Validating under real load
 
