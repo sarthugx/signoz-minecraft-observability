@@ -1,6 +1,6 @@
 # Minecraft Server Observability with SigNoz
 
-Instrumenting a self-hosted Paper Minecraft server with [SigNoz](https://signoz.io) to get real-time visibility into server health — TPS, player load, JVM memory, and logs — all in one place, with automated alerting.
+Instrumenting a self-hosted Paper Minecraft server with [SigNoz](https://signoz.io) to get real-time visibility into server health TPS, player load, JVM memory, and logs all in one place, with automated alerting.
 
 Built for the WeMakeDevs x SigNoz "Agents of SigNoz" hackathon (Track 03: Build Your Own).
 
@@ -101,7 +101,13 @@ Alerts → New Alert Rule → Metric-based:
 
 To confirm the pipeline actually catches incidents (not just idle baselines), I intentionally tanked server performance by detonating thousands of TNT at once — spiking entity physics, block updates, and GC pressure simultaneously. The dashboard captured the TPS crash and recovery in real time, and the alert fired as configured.
 
-See the demo video for this in action: **[YouTube link]**
+**Steady state** (baseline, no load):
+![Steady state dashboard](screenshots/steady-state.png)
+
+**Under stress** (TNT detonation — TPS dip, player-count signal drop, and correlated JVM memory swing):
+![Under stress 1](screenshots/under stress 1.png)
+![Under stress 2](screenshots/under stress 1.png)
+![Under stress 3](screenshots/under stress 1.png)
 
 ## What I ran into
 
